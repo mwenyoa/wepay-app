@@ -1,0 +1,55 @@
+/* Credit Card Iframe Styling
+/* Base Styles */
+#iframe-id {
+    color: grey;
+    border: 1px solid grey;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    font-weight: 200;
+    font-family: Arial;
+    padding: 0;
+    margin-bottom: 5px;
+  }
+  
+  #iframe-id:focus {
+    border: 2px solid #4db6ac;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+  }
+  
+  #iframe-id::placeholder {
+    text-transform: lowercase;
+    color: #D3D3D3;
+    font-size: 17px;
+  }
+  
+  /* Invalid State */
+  #iframe-id.invalid {
+    color: #CD5C5C;
+    border-color: #CD5C5C;
+  }
+  
+  /* Valid State */
+  #iframe-id.valid {
+    color: #4db6ac;
+    border-color: #4db6ac;
+  }
+  
+  /* Labels */
+  #label-id {
+    color: gray;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: 1;
+    text-transform: lowercase;
+    padding: 0;
+    padding-left: 0;
+  }
+  
+  /* Error Messages (Invalid State) */
+  #error-id.invalid {
+    color: #CD5C5C;
+  }
+  
