@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Legal;
 use App\Models\Merchant;
+use App\Models\PaymentMethod;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,5 +38,9 @@ class User extends Authenticatable
 
     public function legal(){
         return $this->hasOne(Legal::class);
+    }
+
+    public function payMethods(){
+        return $this->hasMany(PaymentMethod::class);
     }
 }

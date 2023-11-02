@@ -272,15 +272,27 @@ if (error) {
 
 var iframe_container_id = "credit_card_iframe";
 var creditCard = WePay.createCreditCardIframe(iframe_container_id, options);
-
 document.getElementById('submit-credit-card-button').addEventListener('click', function (event) {
     creditCard.tokenize()
       .then(function (response) {
-        //get the promise response from the console
-        console.log('response', JSON.stringify(response));
-        var node = document.createElement('div');
-        node.innerHTML = JSON.stringify(response);
-        document.getElementById('token').appendChild(node);
+        fetch('/create_payment_method', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                body: JSON.stringify(response),
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        // Request was successful
+                    } else {
+                        // Request failed, handle errors here
+                    }
+                })
+                .catch(function (error) {
+                    // Handle any network or other errors here
+                });
       })
       .catch(function (error) {
         // console.log('error', error);

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WePayController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\LogViewerController;
 use App\Http\Controllers\CardHolderController;
@@ -19,35 +20,40 @@ use App\Http\Controllers\CardHolderController;
 */
 
 // VIEW ROUTES
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/onboarding', function () {
-    return view('onboarding');
-});
 
 
-Route::get('/m', function () {
-    return view('m');
-});
-
-// Checkout
-  Route::get('/checkout', function(){
-    return view('checkout');
-  });
-
-
-Route::get('/banking', function () {
-    return view('banking');
-});
-
-
+// Controller Routes
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    
+    Route::get('/onboarding', function () {
+        return view('onboarding');
+    });
+    
+    
+    Route::get('/m', function () {
+        return view('m');
+    });
+    
+    // Checkout
+      Route::get('/checkout', function(){
+        return view('checkout');
+      });
+    
+    
+    Route::get('/banking', function () {
+        return view('banking');
+    });
 });
 
 require __DIR__.'/auth.php';
@@ -71,11 +77,10 @@ Route::get('new-merchant', function () {
 
 Route::post('create-merchant', [MerchantController::class, 'createMerchant'])->name('create-merchant.store');
 
+// Payment methods 
+ Route::post('create_payment_method', [CheckoutController::class, 'PaymentMethods'])->name('create_payment_method');
 
-
-
-
-Route::get('/cardholder/registration', function () {
+ Route::get('/cardholder/registration', function () {
     return view('cardholder.registration');
 });
 

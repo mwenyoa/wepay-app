@@ -43,20 +43,21 @@
         </div>
        </div>
         <div class="container">
-       <form class="col s12">
+       <form class="col s12" id="billing-address">
+         @csrf
           <div class="row">
             <div class="input-field col s6">
-              <input placeholder="first name" id="first_name" type="text" class="validate">
+              <input placeholder="first name" id="first_name" value="{{auth()->user()->firstname}}" type="text" class="validate">
               <label for="first_name">first name</label>
             </div>
             <div class="input-field col s6">
-              <input placeholder="last name" id="last_name" type="text" class="validate">
+              <input placeholder="last name" id="last_name" value="{{auth()->user()->lastname}}" type="text" class="validate">
               <label for="last_name">last name</label>
             </div>
            </div>
           <div class="row">
             <div class="input-field col s12">
-              <input placeholder="email" id="email" type="text" class="validate">
+              <input placeholder="email" id="email" value="{{auth()->user()->email}}" type="text" class="validate">
               <label for="email">email</label>
             </div>
           </div>
@@ -86,6 +87,7 @@
            </div>
         </form>
         <form action="#">
+        @csrf
           <p>
             <label>
               <input type="checkbox" id="same" onclick="showMe('shipping-input')" />
@@ -94,8 +96,9 @@
           </p>
         </form>
          </div>
-        <form class="col s12" id="shipping-address">
-          <div class="row">
+      <form class="col s12" id="shipping-address">
+        @csrf 
+        <div class="row">
           <div class="col s12">
            <div class="card blue-grey">
              <div class="card-content white-text">
@@ -148,10 +151,8 @@
            </div>
         </form>
         </div>
-        <button class="btn waves-effect waves-light" type="submit" name="action" onclick="closeAddress(); openSubmit();">Next
-            <i class="material-icons right">send</i>
-          </button>
       </div>
+
     </li>
     <li id="checkout">
       <div class="collapsible-header"><i class="material-icons">credit_card</i>Submit</div>
@@ -162,7 +163,7 @@
             <img class="responsive-img" id="accepted-cards" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-1671/card-brands.png" border="0" alt="Accepted Cards"/>
             </div>
             <div class="row">
-          <div id="credit_card_iframe"></div>
+          <div id="credit_card_iframe">  </div>
             </div>
             <div class="row">
               <div class="card blue-grey lighten-2">
